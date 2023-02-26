@@ -1,14 +1,11 @@
-#Сложность Q (n log n)
-# Сортируем изначальный список для более быстрого нахождения разницы чисел
-# Задаем минимальную разницу как разницу наибольшего числа и наименьшего для оптимизации числа
-# Идем по каждому числу из списка. Если разность числа и его последующего меньше минимальной разницы то минимальная разница обновляется
-# Возвращаем список со списками в котором числа из списка и проверяется разность чисел на соответствие минимальной разницы
-def minimumAbsDifference(arr):
-    arr = sorted(arr)
-    findmin = arr[-1]-arr[0]
-    for i in range(len(arr)-1):
-        if arr[i+1] - arr[i] < findmin:
-            findmin = arr[i+1] - arr[i]
-    return [[arr[x],arr[x+1]] for x in range(len(arr)-1) if arr[x+1]-arr[x] == findmin]
+from typing import List
+"""Сложность данной функции O(n*m).
+        """
 
-print(minimumAbsDifference([4,2,1,3]))
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        maximumProfit = 0 # Проходит элемент через цикл
+        for i in range(1, len(prices)):    # Проверяет больше ли цена на i
+            if prices[i] > prices[i-1]:    # Добавляет разницу к прибыли и увеличивает ее
+                maximumProfit += prices[i] - prices[i-1]
+        return maximumProfit        # Возвращает максимальную прибыль

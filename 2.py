@@ -1,17 +1,19 @@
-#Сложность Q(n)
-# Пускаем число в цикл пока оно не станет равно нулю
-# Если число четное, то делим пополам
-# Иначе отнимаем единицу
-# В конце каждой операции увеличиваем счетчик
-def numberOfMatches(n: int) -> int:
-    matches = 0
-    while n > 1:
-        if n % 2 == 1:
-            matches += (n - 1) // 2
-            n = 1 + (n - 1) // 2
-        else:
-            matches += n // 2
-            n = n // 2
-    return matches
+"""
+  Сложность данной функции O(n+1)
+        Args:
+            n (int): list's length.
+        Returns:
+            int: max element in this list.
+"""
 
-print(numberOfMatches(n = 65))
+class Solution:
+    def getMaximumGenerated(self, n: int) -> int:
+        gen = [0] * (n+1)
+        if len(gen) >= 2:
+            gen[1] = 1
+        for i in range(2,n+1):
+            if i % 2 == 0:
+                gen[i] = gen[i //2]
+            else:
+                gen[i] = gen[i//2] + gen[i//2 + 1]
+        return max(gen)

@@ -1,16 +1,26 @@
-#Сложность Q(n)
-# Пускаем число в цикл, пока оно не станет равно нулю
-# Если число четное, то делим пополам
-# Иначе отнимаем единицуgit commit -m
-# В конце каждой операции увеличиваем счетчик
-def numberOfSteps(num):
-    steps = 0
-    while num != 0:
-        if num % 2 == 1:
-            num -= 1
-        else:
-            num = num//2
-        steps += 1
+#    Сложность данной функции O(n*m).
+#     Args:
+#         matrix (List[List[int]]): matrix where we search squares.
+#     Returns:
+#         int: amount of squares in matrix.
 
-    return steps
-print(numberOfSteps(7))
+
+from typing import List
+
+
+class Solution:
+    def countSquares(self, matrix: List[List[int]]) -> int:
+
+
+        count = matrix.count(1)
+        count = 0
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] == 1:
+                    count += 1
+                if i == 0 or j == 0: continue
+
+                old_val = matrix[i][j]
+                matrix[i][j] = min(matrix[i - 1][j - 1], matrix[i][j - 1], matrix[i - 1][j]) + 1 if matrix[i][j] == 1 else 0
+                count = count + matrix[i][j] - old_val
+        return count
